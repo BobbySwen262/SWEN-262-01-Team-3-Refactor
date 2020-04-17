@@ -4,6 +4,7 @@ import LanePinsetterSubsystem.Bowler;
 
 import java.util.HashMap;
 
-public interface LaneScoreCase {
-    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, int frame);
+abstract class LaneScoreCase {
+    protected ScoreBoard scoreboard = new ScoreBoard();
+    abstract void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, int frame);
 }

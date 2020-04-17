@@ -1,5 +1,5 @@
-/*
- * PinSetterView/.java
+package LanePinsetterSubsystem;/*
+ * LanePinsetterSubsystem.PinSetterView/.java
  *
  * Version:
  *   $Id$
@@ -12,9 +12,6 @@
  *  constructs a prototype PinSetter GUI
  *
  */
-
-import LanePinsetterSubsystem.PinsetterEvent;
-import LanePinsetterSubsystem.PinsetterObserver;
 
 import java.awt.*;
 import javax.swing.*;

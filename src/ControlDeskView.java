@@ -14,6 +14,7 @@
  */
 
 import LanePinsetterSubsystem.Lane;
+import LanePinsetterSubsystem.LaneStatusView;
 import LanePinsetterSubsystem.Pinsetter;
 
 import java.awt.*;

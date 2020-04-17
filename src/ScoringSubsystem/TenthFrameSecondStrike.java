@@ -1,4 +1,12 @@
 package ScoringSubsystem;
 
-public class TenthFrameSecondStrike {
+import LanePinsetterSubsystem.Bowler;
+
+import java.util.HashMap;
+
+public class TenthFrameSecondStrike extends LaneScoreCase{
+    @Override
+    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame) {
+
+    }
 }

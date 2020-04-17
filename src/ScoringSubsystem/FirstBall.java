@@ -14,7 +14,7 @@ public class FirstBall extends LaneScoreCase{
         int currScore = scoreCard.get(currBowler)[frame][0];
 
         if ( currScore < 10 ){
-            scoreboard.setState(new FirstBallPreviousStrike());
+            scoreboard.setState(new SecondBall());
         }else{
             scoreboard.setState(new FirstBallPreviousStrike());
         }

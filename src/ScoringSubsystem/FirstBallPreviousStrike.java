@@ -10,13 +10,13 @@ public class FirstBallPreviousStrike extends LaneScoreCase{
 
         int currScore = scoreCard.get(currBowler)[frame][0];
 
-        if(frame <= 10)
+        if(frame >= 10)
         {
             if (currScore == 10){
                 scoreboard.setState(new TenthFrameStrikeNinthStrike());
             }
             else{
-                scoreboard.setState(new TenthFrameSecondBallNinthNoStrike());
+                scoreboard.setState(new TenthFrameSecondBallNinthStrike());
             }
         }
         else{

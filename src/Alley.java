@@ -16,7 +16,7 @@
  *   *** empty log message ***
  *
  *   Revision 1.1  2003/01/12 19:09:12  ???
- *   Adding Party, Lane, Bowler, and Alley.
+ *   Adding LanePinsetterSubsystem.Party, LanePinsetterSubsystem.Lane, LanePinsetterSubsystem.Bowler, and Alley.
  *
  */
 

@@ -9,7 +9,7 @@
  * 		ControlDesk now runs its own thread and polls for free lanes to assign queue members to
  * 		
  * 		Revision 1.12  2003/02/02 20:46:13  ???
- * 		Added " 's Party" to party names.
+ * 		Added " 's LanePinsetterSubsystem.Party" to party names.
  * 		
  * 		Revision 1.11  2003/02/02 20:43:25  ???
  * 		misc cleanup
@@ -39,6 +39,10 @@
  * Class that represents control desk
  *
  */
+
+import LanePinsetterSubsystem.Bowler;
+import LanePinsetterSubsystem.Lane;
+import LanePinsetterSubsystem.Party;
 
 import java.util.*;
 import java.io.*;
@@ -96,11 +100,11 @@ class ControlDesk extends Thread {
 		
 
     /**
-     * Retrieves a matching Bowler from the bowler database.
+     * Retrieves a matching LanePinsetterSubsystem.Bowler from the bowler database.
      *
-     * @param nickName	The NickName of the Bowler
+     * @param nickName	The NickName of the LanePinsetterSubsystem.Bowler
      *
-     * @return a Bowler object.
+     * @return a LanePinsetterSubsystem.Bowler object.
      *
      */
 
@@ -178,7 +182,7 @@ class ControlDesk extends Thread {
 			String nextParty =
 				((Bowler) ((Vector) ((Party) partyQueue.asVector().get( i ) ).getMembers())
 					.get(0))
-					.getNickName() + "'s Party";
+					.getNickName() + "'s LanePinsetterSubsystem.Party";
 			displayPartyQueue.addElement(nextParty);
 		}
 		return displayPartyQueue;

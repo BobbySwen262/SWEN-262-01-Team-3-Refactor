@@ -15,9 +15,11 @@
  */
 
 /**
- * Class for interfacing with Bowler database
+ * Class for interfacing with LanePinsetterSubsystem.Bowler database
  *
  */
+
+import LanePinsetterSubsystem.Bowler;
 
 import java.util.*;
 import java.io.*;
@@ -28,11 +30,11 @@ class BowlerFile {
 	private static String BOWLER_DAT = "BOWLERS.DAT";
 
     /**
-     * Retrieves bowler information from the database and returns a Bowler objects with populated fields.
+     * Retrieves bowler information from the database and returns a LanePinsetterSubsystem.Bowler objects with populated fields.
      *
      * @param nickName	the nickName of the bolwer to retrieve
      *
-     * @return a Bowler object
+     * @return a LanePinsetterSubsystem.Bowler object
      * 
      */
 
@@ -60,11 +62,11 @@ class BowlerFile {
 	}
 
     /**
-     * Stores a Bowler in the database
+     * Stores a LanePinsetterSubsystem.Bowler in the database
      *
-     * @param nickName	the NickName of the Bowler
-     * @param fullName	the FullName of the Bowler
-     * @param email	the E-mail Address of the Bowler
+     * @param nickName	the NickName of the LanePinsetterSubsystem.Bowler
+     * @param fullName	the FullName of the LanePinsetterSubsystem.Bowler
+     * @param email	the E-mail Address of the LanePinsetterSubsystem.Bowler
      *
      */
 

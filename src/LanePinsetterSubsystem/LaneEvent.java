@@ -1,7 +1,7 @@
-/*  $Id$
+package LanePinsetterSubsystem;/*  $Id$
  *
  *  Revisions:
- *    $Log: LaneEvent.java,v $
+ *    $Log: LanePinsetterSubsystem.LaneEvent.java,v $
  *    Revision 1.6  2003/02/16 22:59:34  ???
  *    added mechnanical problem flag
  *
@@ -23,6 +23,9 @@
  *
  */
 
+import LanePinsetterSubsystem.Bowler;
+import LanePinsetterSubsystem.Party;
+
 import java.util.HashMap;
 
 public class LaneEvent {
@@ -38,7 +41,7 @@ public class LaneEvent {
 	int[] curScores;
 	boolean mechProb;
 	
-	public LaneEvent( Party pty, int theIndex, Bowler theBowler, int[][] theCumulScore, HashMap theScore, int theFrameNum, int[] theCurScores, int theBall, boolean mechProblem) {
+	public LaneEvent(Party pty, int theIndex, Bowler theBowler, int[][] theCumulScore, HashMap theScore, int theFrameNum, int[] theCurScores, int theBall, boolean mechProblem) {
 		p = pty;
 		index = theIndex;
 		bowler = theBowler;

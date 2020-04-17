@@ -1,3 +1,6 @@
+import LanePinsetterSubsystem.Bowler;
+import LanePinsetterSubsystem.Party;
+
 import java.util.HashMap;
 
 public interface LaneEventInterface extends java.rmi.Remote {

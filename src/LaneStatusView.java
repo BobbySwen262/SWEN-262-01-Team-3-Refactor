@@ -6,11 +6,11 @@
  * Window>Preferences>Java>Code Generation.
  */
 
+import LanePinsetterSubsystem.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
 
 public class LaneStatusView implements ActionListener, LaneObserver, PinsetterObserver {
 
@@ -59,13 +59,13 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
-		viewLane = new JButton("View Lane");
+		viewLane = new JButton("View LanePinsetterSubsystem.Lane");
 		JPanel viewLanePanel = new JPanel();
 		viewLanePanel.setLayout(new FlowLayout());
 		viewLane.addActionListener(this);
 		viewLanePanel.add(viewLane);
 
-		viewPinSetter = new JButton("Pinsetter");
+		viewPinSetter = new JButton("LanePinsetterSubsystem.Pinsetter");
 		JPanel viewPinSetterPanel = new JPanel();
 		viewPinSetterPanel.setLayout(new FlowLayout());
 		viewPinSetter.addActionListener(this);

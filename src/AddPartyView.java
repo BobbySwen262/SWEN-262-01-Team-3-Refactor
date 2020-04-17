@@ -25,6 +25,8 @@
  *
  */
 
+import LanePinsetterSubsystem.Bowler;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -32,7 +34,6 @@ import javax.swing.border.*;
 import javax.swing.event.*;
 
 import java.util.*;
-import java.text.*;
 
 /**
  * Constructor for GUI used to Add Parties to the waiting party queue.
@@ -58,17 +59,17 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 		this.controlDesk = controlDesk;
 		maxSize = max;
 
-		win = new JFrame("Add Party");
+		win = new JFrame("Add LanePinsetterSubsystem.Party");
 		win.getContentPane().setLayout(new BorderLayout());
 		((JPanel) win.getContentPane()).setOpaque(false);
 
 		JPanel colPanel = new JPanel();
 		colPanel.setLayout(new GridLayout(1, 3));
 
-		// Party Panel
+		// LanePinsetterSubsystem.Party Panel
 		JPanel partyPanel = new JPanel();
 		partyPanel.setLayout(new FlowLayout());
-		partyPanel.setBorder(new TitledBorder("Your Party"));
+		partyPanel.setBorder(new TitledBorder("Your LanePinsetterSubsystem.Party"));
 
 		party = new Vector();
 		Vector empty = new Vector();
@@ -82,10 +83,10 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 		//        partyPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		partyPanel.add(partyPane);
 
-		// Bowler Database
+		// LanePinsetterSubsystem.Bowler Database
 		JPanel bowlerPanel = new JPanel();
 		bowlerPanel.setLayout(new FlowLayout());
-		bowlerPanel.setBorder(new TitledBorder("Bowler Database"));
+		bowlerPanel.setBorder(new TitledBorder("LanePinsetterSubsystem.Bowler Database"));
 
 		try {
 			bowlerdb = new Vector(BowlerFile.getBowlers());
@@ -108,7 +109,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
-		addPatron = new JButton("Add to Party");
+		addPatron = new JButton("Add to LanePinsetterSubsystem.Party");
 		JPanel addPatronPanel = new JPanel();
 		addPatronPanel.setLayout(new FlowLayout());
 		addPatron.addActionListener(this);
@@ -159,7 +160,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 		if (e.getSource().equals(addPatron)) {
 			if (selectedNick != null && party.size() < maxSize) {
 				if (party.contains(selectedNick)) {
-					System.err.println("Member already in Party");
+					System.err.println("Member already in LanePinsetterSubsystem.Party");
 				} else {
 					party.add(selectedNick);
 					partyList.setListData(party);
@@ -201,7 +202,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 	}
 
 /**
- * Accessor for Party
+ * Accessor for LanePinsetterSubsystem.Party
  */
 
 	public Vector getNames() {
@@ -227,7 +228,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 				party.add(newPatron.getNick());
 				partyList.setListData(party);
 			} else {
-				System.err.println( "A Bowler with that name already exists." );
+				System.err.println( "A LanePinsetterSubsystem.Bowler with that name already exists." );
 			}
 		} catch (Exception e2) {
 			System.err.println("File I/O Error");
@@ -235,7 +236,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 	}
 
 /**
- * Accessor for Party
+ * Accessor for LanePinsetterSubsystem.Party
  */
 
 	public Vector getParty() {

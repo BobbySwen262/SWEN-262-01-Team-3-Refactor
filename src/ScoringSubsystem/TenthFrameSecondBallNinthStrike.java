@@ -7,6 +7,13 @@ import java.util.HashMap;
 public class TenthFrameSecondBallNinthStrike extends LaneScoreCase {
     @Override
     void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame) {
-
+        int pinsDownSecondBall = scoreCard.get(currBowler)[frame][1];
+        int pinsDownFirstBall = scoreCard.get(currBowler)[frame][0];
+        numericScores.get(currBowler)[frame-1] = 10 + pinsDownFirstBall + pinsDownSecondBall;
+        if(pinsDownSecondBall + pinsDownFirstBall == 10){
+            scoreboard.setState(new TenthFrameSpare());
+        } else {
+            scoreboard.setState(new TenthFrameEnd());
+        }
     }
 }

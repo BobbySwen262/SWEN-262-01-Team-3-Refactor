@@ -28,7 +28,7 @@ import LanePinsetterSubsystem.Party;
 
 import java.util.HashMap;
 
-public class LaneEvent {
+public class LaneEvent implements BowlEvent {
 
 	private Party p;
 	int frame;
@@ -40,8 +40,10 @@ public class LaneEvent {
 	int frameNum;
 	int[] curScores;
 	boolean mechProb;
+	Lane lane;
 	
-	public LaneEvent(Party pty, int theIndex, Bowler theBowler, int[][] theCumulScore, HashMap theScore, int theFrameNum, int[] theCurScores, int theBall, boolean mechProblem) {
+	public LaneEvent(Party pty, int theIndex, Bowler theBowler, int[][] theCumulScore, HashMap theScore, int theFrameNum, int[] theCurScores, int theBall, boolean mechProblem, Lane lane) {
+		this.lane = lane;
 		p = pty;
 		index = theIndex;
 		bowler = theBowler;
@@ -92,6 +94,10 @@ public class LaneEvent {
 	
 	public Bowler getBowler() {
 		return bowler;
+	}
+
+	public Lane getLane(){
+		return lane;
 	}
 
 };

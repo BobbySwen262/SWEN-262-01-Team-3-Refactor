@@ -73,7 +73,7 @@ package LanePinsetterSubsystem;/*
 import java.util.*;
 import java.lang.Boolean;
 
-public class Pinsetter {
+public class Pinsetter implements LaneElement{
 
 	private Random rnd;
 	private Vector subscribers;
@@ -91,6 +91,8 @@ public class Pinsetter {
 	private boolean foul;
 	private int throwNumber;
 
+	private LaneManager mediator;
+
 	/** sendEvent()
 	 * 
 	 * Sends pinsetter events to all subscribers
@@ -99,10 +101,8 @@ public class Pinsetter {
 	 * @post all subscribers have recieved pinsetter event with updated state
 	 * */
 	private void sendEvent(int jdpins) {	// send events when our state is changd
-		for (int i=0; i < subscribers.size(); i++) {
-			((PinsetterObserver)subscribers.get(i)).receivePinsetterEvent(
-				new PinsetterEvent(pins, foul, throwNumber, jdpins));
-		}
+		PinsetterEvent pe = new PinsetterEvent(pins, foul, throwNumber, jdpins, this);
+		notifyManager(pe);
 	}
 
 	/** LanePinsetterSubsystem.Pinsetter()
@@ -113,7 +113,8 @@ public class Pinsetter {
 	 * @post a new pinsetter is created
 	 * @return LanePinsetterSubsystem.Pinsetter object
 	 */
-	public Pinsetter() {
+	public Pinsetter(LaneManager mediator) {
+		this.mediator = mediator;
 		pins = new boolean[10];
 		rnd = new Random();
 		subscribers = new Vector();
@@ -199,5 +200,9 @@ public class Pinsetter {
 		subscribers.add(subscriber);
 	}
 
+	@Override
+	public void notifyManager(BowlEvent e) {
+		mediator.receivePinsetterEvent((PinsetterEvent)e);
+	}
 };
 

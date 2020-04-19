@@ -136,7 +136,7 @@ import ScoringSubsystem.ScoreBoard;
 
 import java.util.*;
 
-public class Lane extends Thread implements PinsetterObserver {	
+public class Lane extends Thread implements PinsetterObserver, LaneElement {
 	private Party party;
 	private Pinsetter setter;
 	private HashMap scores;
@@ -165,6 +165,8 @@ public class Lane extends Thread implements PinsetterObserver {
 	private HashMap<Bowler, int[][]> scoreCardMap = new HashMap<>();
 	private HashMap<Bowler, int[]>  numericScores = new HashMap<>();
 
+	private LaneManager mediator;
+
 	/** LanePinsetterSubsystem.Lane()
 	 * 
 	 * Constructs a new lane and starts its thread
@@ -172,8 +174,10 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @pre none
 	 * @post a new lane has been created and its thered is executing
 	 */
-	public Lane() { 
-		setter = new Pinsetter();
+	public Lane(LaneManager mediator) {
+		this.mediator = mediator;
+		setter = new Pinsetter(mediator);
+		this.mediator.addPinsetter(setter);
 		scores = new HashMap();
 		subscribers = new Vector();
 
@@ -182,7 +186,6 @@ public class Lane extends Thread implements PinsetterObserver {
 
 		gameNumber = 0;
 
-		setter.subscribe( this );
 		
 		this.start();
 	}
@@ -238,12 +241,13 @@ public class Lane extends Thread implements PinsetterObserver {
 					}
 				}
 			} else if (partyAssigned && gameFinished) {
+				mediator.printContents();
 				for(Object o:party.getMembers()) {
 					scoreBoards.get(o).runState(scoreCardMap, numericScores, (Bowler)o, frameNumber - 1, scoreBoards.get(o));
 				}
 				convertScoreCards();
 				convertNumericScores();
-				publish(new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber, curScores, ball, gameIsHalted));
+				publish(new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber, curScores, ball, gameIsHalted, this));
 				EndGamePrompt egp = new EndGamePrompt( ((Bowler) party.getMembers().get(0)).getNickName() + "'s LanePinsetterSubsystem.Party" );
 				int result = egp.getResult();
 				egp.distroy();
@@ -450,7 +454,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @return		The new lane event
 	 */
 	private LaneEvent lanePublish(  ) {
-		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber+1, curScores, ball, gameIsHalted);
+		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber+1, curScores, ball, gameIsHalted, this);
 		return laneEvent;
 	}
 
@@ -472,27 +476,6 @@ public class Lane extends Thread implements PinsetterObserver {
 		return gameFinished;
 	}
 
-	/** subscribe
-	 * 
-	 * Method that will add a subscriber
-	 * 
-	 *
-	 */
-
-	public void subscribe( LaneObserver adding ) {
-		subscribers.add( adding );
-	}
-
-	/** unsubscribe
-	 * 
-	 * Method that unsubscribes an observer from this object
-	 * 
-	 * @param removing	The observer to be removed
-	 */
-	
-	public void unsubscribe( LaneObserver removing ) {
-		subscribers.remove( removing );
-	}
 
 	/** publish
 	 *
@@ -502,13 +485,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 */
 
 	public void publish( LaneEvent event ) {
-		if( subscribers.size() > 0 ) {
-			Iterator eventIterator = subscribers.iterator();
-			
-			while ( eventIterator.hasNext() ) {
-				( (LaneObserver) eventIterator.next()).receiveLaneEvent( event );
-			}
-		}
+		notifyManager(event);
 	}
 
 	/**
@@ -561,5 +538,10 @@ public class Lane extends Thread implements PinsetterObserver {
 		for (int i = 0; i < party.getMembers().size(); i++){
 			cumulScores[i] = Arrays.copyOf(numericScores.get(party.getMembers().get(i)), 10);
 		}
+	}
+
+	@Override
+	public void notifyManager(BowlEvent e) {
+		mediator.receiveLaneEvent((LaneEvent)e);
 	}
 }

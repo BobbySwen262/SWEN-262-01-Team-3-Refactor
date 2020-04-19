@@ -10,7 +10,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
-public class LaneView implements LaneObserver, ActionListener {
+public class LaneView implements LaneObserver, ActionListener, LaneElement {
 
 	private int roll;
 	private boolean initDone = true;
@@ -31,8 +31,11 @@ public class LaneView implements LaneObserver, ActionListener {
 	JButton maintenance;
 	Lane lane;
 
-	public LaneView(Lane lane, int laneNum) {
+	private LaneManager mediator;
 
+	public LaneView(Lane lane, int laneNum, LaneManager mediator) {
+		this.mediator = mediator;
+		this.mediator.addLaneView(this);
 		this.lane = lane;
 
 		initDone = true;
@@ -208,4 +211,8 @@ public class LaneView implements LaneObserver, ActionListener {
 		}
 	}
 
+	@Override
+	public void notifyManager(BowlEvent e) {
+
+	}
 }

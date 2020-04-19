@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class LaneStatusView implements ActionListener, LaneObserver, PinsetterObserver {
+public class LaneStatusView implements ActionListener, LaneObserver, PinsetterObserver, LaneElement {
 
 	private JPanel jp;
 
@@ -28,7 +28,11 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
 	boolean laneShowing;
 	boolean psShowing;
 
-	public LaneStatusView(Lane lane, int laneNum ) {
+	private LaneManager mediator;
+	public LaneStatusView(Lane lane, int laneNum, LaneManager mediator ) {
+
+		this.mediator = mediator;
+		this.mediator.addLaneStatusView(this);
 
 		this.lane = lane;
 		this.laneNum = laneNum;
@@ -36,12 +40,10 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
 		laneShowing=false;
 		psShowing=false;
 
-		psv = new PinSetterView( laneNum );
+		psv = new PinSetterView( laneNum, this.mediator );
 		Pinsetter ps = lane.getPinsetter();
-		ps.subscribe(psv);
 
-		lv = new LaneView( lane, laneNum );
-		lane.subscribe(lv);
+		lv = new LaneView( lane, laneNum, this.mediator );
 
 
 		jp = new JPanel();
@@ -152,4 +154,8 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
 		
 	}
 
+	@Override
+	public void notifyManager(BowlEvent e) {
+
+	}
 }

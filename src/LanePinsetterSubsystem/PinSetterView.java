@@ -18,7 +18,7 @@ import javax.swing.*;
 import java.util.Vector;
 
 
-public class PinSetterView implements PinsetterObserver {
+public class PinSetterView implements PinsetterObserver, LaneElement {
 
 
     private Vector pinVect = new Vector ( );
@@ -39,8 +39,15 @@ public class PinSetterView implements PinsetterObserver {
     
 
 	private JFrame frame;
+
+	private LaneManager mediator;
     
-    public PinSetterView ( int laneNum ) {
+    public PinSetterView ( int laneNum, LaneManager mediator ) {
+
+
+
+    	this.mediator = mediator;
+		this.mediator.addPinsetterView(this);
 	
 	frame = new JFrame ( "LanePinsetterSubsystem.Lane " + laneNum + ":" );
 	
@@ -214,7 +221,11 @@ public class PinSetterView implements PinsetterObserver {
     }
     
     public static void main ( String args [ ] ) {
-		PinSetterView pg = new PinSetterView ( 1 );
+		PinSetterView pg = new PinSetterView ( 1, null );
     }
-    
+
+	@Override
+	public void notifyManager(BowlEvent e) {
+
+	}
 }

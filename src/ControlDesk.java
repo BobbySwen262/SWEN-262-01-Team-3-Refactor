@@ -40,9 +40,7 @@
  *
  */
 
-import LanePinsetterSubsystem.Bowler;
-import LanePinsetterSubsystem.Lane;
-import LanePinsetterSubsystem.Party;
+import LanePinsetterSubsystem.*;
 
 import java.util.*;
 import java.io.*;
@@ -50,7 +48,7 @@ import java.io.*;
 class ControlDesk extends Thread {
 
 	/** The collection of Lanes */
-	private HashSet lanes;
+	private ArrayList<Lane> lanes;
 
 	/** The party wait queue */
 	private Queue partyQueue;
@@ -61,6 +59,7 @@ class ControlDesk extends Thread {
 	/** The collection of subscribers */
 	private Vector subscribers;
 
+	private LaneManager mediator;
     /**
      * Constructor for the ControlDesk class
      *
@@ -70,15 +69,19 @@ class ControlDesk extends Thread {
 
 	public ControlDesk(int numLanes) {
 		this.numLanes = numLanes;
-		lanes = new HashSet(numLanes);
+		lanes = new ArrayList<>();
 		partyQueue = new Queue();
 
 		subscribers = new Vector();
 
+		mediator = new LaneMediator();
+
 		for (int i = 0; i < numLanes; i++) {
-			lanes.add(new Lane());
+			Lane lane = new Lane(mediator);
+			lanes.add(lane);
+			mediator.addLane(lane);
 		}
-		
+
 		this.start();
 
 	}
@@ -235,7 +238,11 @@ class ControlDesk extends Thread {
      *
      */
 
-	public HashSet getLanes() {
+	public ArrayList<Lane> getLanes() {
 		return lanes;
+	}
+
+	public LaneManager getMediator() {
+		return mediator;
 	}
 }

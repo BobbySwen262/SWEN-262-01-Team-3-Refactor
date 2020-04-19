@@ -12,12 +12,14 @@ package LanePinsetterSubsystem;/*  $Id$
  *
  */
 
-public class PinsetterEvent {
+public class PinsetterEvent implements BowlEvent{
 
 	private boolean[] pinsStillStanding;
 	private boolean foulCommited;
 	private int throwNumber;
 	private int pinsDownThisThrow;
+
+	private Pinsetter pinsetter;
 
 	/** LanePinsetterSubsystem.PinsetterEvent()
 	 * 
@@ -26,7 +28,8 @@ public class PinsetterEvent {
 	 * @pre none
 	 * @post the object has been initialized
 	 */
-	public PinsetterEvent(boolean[] ps, boolean foul, int tn, int pinsDownThisThrow) {
+	public PinsetterEvent(boolean[] ps, boolean foul, int tn, int pinsDownThisThrow, Pinsetter pinsetter) {
+		this.pinsetter = pinsetter;
 		pinsStillStanding = new boolean[10];
 
 		for (int i=0; i <= 9; i++) {
@@ -86,6 +89,10 @@ public class PinsetterEvent {
 	 */
 	public int getThrowNumber() {
 		return throwNumber;
+	}
+
+	public Pinsetter getPinsetter(){
+		return pinsetter;
 	}
 };
 

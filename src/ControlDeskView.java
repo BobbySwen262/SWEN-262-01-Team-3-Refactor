@@ -35,6 +35,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 	
 	private ControlDesk controlDesk;
 
+
 	/**
 	 * Displays a GUI representation of the ControlDesk
 	 *
@@ -84,14 +85,14 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 		laneStatusPanel.setLayout(new GridLayout(numLanes, 1));
 		laneStatusPanel.setBorder(new TitledBorder("LanePinsetterSubsystem.Lane Status"));
 
-		HashSet lanes=controlDesk.getLanes();
+		ArrayList<Lane> lanes=controlDesk.getLanes();
 		Iterator it = lanes.iterator();
 		int laneCount=0;
 		while (it.hasNext()) {
 			Lane curLane = (Lane) it.next();
-			LaneStatusView laneStat = new LaneStatusView(curLane,(laneCount+1));
-			curLane.subscribe(laneStat);
-			((Pinsetter)curLane.getPinsetter()).subscribe(laneStat);
+
+			LaneStatusView laneStat = new LaneStatusView(curLane,(laneCount+1),controlDesk.getMediator());
+
 			JPanel lanePanel = laneStat.showLane();
 			lanePanel.setBorder(new TitledBorder("LanePinsetterSubsystem.Lane" + ++laneCount ));
 			laneStatusPanel.add(lanePanel);

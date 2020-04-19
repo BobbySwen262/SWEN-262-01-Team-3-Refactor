@@ -18,7 +18,7 @@ import javax.swing.*;
 import java.util.Vector;
 
 
-public class PinSetterView implements PinsetterObserver, LaneElement {
+public class PinSetterView implements LaneElement {
 
 
     private Vector pinVect = new Vector ( );

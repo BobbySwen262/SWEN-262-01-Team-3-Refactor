@@ -10,7 +10,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
-public class LaneView implements LaneObserver, ActionListener, LaneElement {
+public class LaneView implements ActionListener, LaneElement {
 
 	private int roll;
 	private boolean initDone = true;

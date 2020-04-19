@@ -187,19 +187,13 @@ public class Pinsetter implements LaneElement{
 		for (int i=0; i <= 9; i++) {
 			pins[i] = true;
 		}
-	}		
-
-	/** subscribe()
-	 * 
-	 * subscribe objects to send events to
-	 * 
-	 * @pre none
-	 * @post the subscriber object will recieve events when their generated
-	 */
-	public void subscribe(PinsetterObserver subscriber) {
-		subscribers.add(subscriber);
 	}
 
+
+	/**
+	 * notifies the mediator of a state change via an event
+	 * @param e event
+	 */
 	@Override
 	public void notifyManager(BowlEvent e) {
 		mediator.receivePinsetterEvent((PinsetterEvent)e);

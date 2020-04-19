@@ -136,7 +136,7 @@ import ScoringSubsystem.ScoreBoard;
 
 import java.util.*;
 
-public class Lane extends Thread implements PinsetterObserver, LaneElement {
+public class Lane extends Thread implements LaneElement {
 	private Party party;
 	private Pinsetter setter;
 	private HashMap scores;
@@ -241,7 +241,6 @@ public class Lane extends Thread implements PinsetterObserver, LaneElement {
 					}
 				}
 			} else if (partyAssigned && gameFinished) {
-				mediator.printContents();
 				for(Object o:party.getMembers()) {
 					scoreBoards.get(o).runState(scoreCardMap, numericScores, (Bowler)o, frameNumber - 1, scoreBoards.get(o));
 				}
@@ -515,6 +514,9 @@ public class Lane extends Thread implements PinsetterObserver, LaneElement {
 	}
 
 
+	/**
+	 * Converts the scoreCard into a form that is displayable
+	 */
 	private void convertScoreCards(){
 		for (Bowler b : scoreCardMap.keySet()){
 			int[] rollList = new int[25];
@@ -534,12 +536,19 @@ public class Lane extends Thread implements PinsetterObserver, LaneElement {
 		}
 	}
 
+	/**
+	 * Converts the numeric scores into a displayable type
+	 */
 	private void convertNumericScores(){
 		for (int i = 0; i < party.getMembers().size(); i++){
 			cumulScores[i] = Arrays.copyOf(numericScores.get(party.getMembers().get(i)), 10);
 		}
 	}
 
+	/**
+	 * Notifies the mediator with an event saying that something has changed
+	 * @param e - event that contains change data
+	 */
 	@Override
 	public void notifyManager(BowlEvent e) {
 		mediator.receiveLaneEvent((LaneEvent)e);

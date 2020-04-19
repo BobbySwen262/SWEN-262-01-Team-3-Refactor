@@ -4,9 +4,12 @@ import LanePinsetterSubsystem.Bowler;
 
 import java.util.HashMap;
 
-public class FirstBallPreviousStrike extends LaneScoreCase{
+public class FirstBallPreviousStrike implements LaneScoreCase{
     @Override
-    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame, ScoreBoard scoreBoard) {
+    /**
+     * This represents the first ball with a strike in the previous frame
+     */
+    public void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame, ScoreBoard scoreBoard) {
 
         int currScore = scoreCard.get(currBowler)[frame][0];
 

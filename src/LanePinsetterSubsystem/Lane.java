@@ -429,7 +429,14 @@ public class Lane extends Thread implements PinsetterObserver {
 		curScore[ index - 1] = score;
 		scoreCardMap.get(Cur)[frame-1][ball-1] = score;
 		scores.put(Cur, curScore);
-		scoreBoards.get(Cur).runState(scoreCardMap, numericScores, Cur, frame-1, scoreBoards.get(Cur));
+		getScore();
+	}
+
+	/**
+	 * Responsible for getting the score from the scoreboard and converting it to displayable data
+	 */
+	public void getScore(){
+		scoreBoards.get(currentThrower).runState(scoreCardMap, numericScores, currentThrower, frameNumber, scoreBoards.get(currentThrower));
 
 		convertScoreCards();
 		convertNumericScores();

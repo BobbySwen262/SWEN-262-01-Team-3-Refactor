@@ -7,12 +7,12 @@ import java.util.HashMap;
 public class TenthFrameSpare extends LaneScoreCase{
 
     @Override
-    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame) {
+    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame, ScoreBoard scoreBoard) {
         int currScore = scoreCard.get(currBowler)[frame][2];
         if (currScore == 10){
-            scoreboard.setState(new TenthFrameEnd());
+            scoreBoard.setState(new TenthFrameEnd());
         }else{
-            scoreboard.setState(new TenthFrameEnd());
+            scoreBoard.setState(new TenthFrameEnd());
         }
     }
 }

@@ -7,24 +7,28 @@ import java.util.HashMap;
 public class FirstBallPreviousSpare extends LaneScoreCase {
     public FirstBallPreviousSpare(){}
     @Override
-    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame) {
+    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame, ScoreBoard scoreBoard) {
         int currScore = scoreCard.get(currBowler)[frame][0];
-        numericScores.get(currBowler)[frame-1]=10+currScore;
-        if(frame <= 10)
+        if(frame > 1) {
+            numericScores.get(currBowler)[frame - 1] = numericScores.get(currBowler)[frame - 2] + 10 + currScore;
+        } else {
+            numericScores.get(currBowler)[frame - 1] = 10 + currScore;
+        }
+        if(frame >= 9)
         {
             if (currScore == 10){
-                scoreboard.setState(new TenthFrameSecondStrike());
+                scoreBoard.setState(new TenthFrameStrikeNinthNoStrike());
             }
             else{
-                scoreboard.setState(new TenthFrameSecondBallNinthNoStrike());
+                scoreBoard.setState(new TenthFrameSecondBallNinthNoStrike());
             }
         }
         else{
             if (currScore == 10){
-                scoreboard.setState(new FirstBallPreviousStrike());
+                scoreBoard.setState(new FirstBallPreviousStrike());
             }
             else{
-                scoreboard.setState(new SecondBall());
+                scoreBoard.setState(new SecondBall());
             }
         }
     }

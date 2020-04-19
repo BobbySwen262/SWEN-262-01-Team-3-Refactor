@@ -5,25 +5,24 @@ import LanePinsetterSubsystem.Bowler;
 import java.util.HashMap;
 
 public class FirstBall extends LaneScoreCase{
-
     FirstBall(){
 
     }
     @Override
-    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame) {
+    void score(HashMap<Bowler, int[][]> scoreCard, HashMap<Bowler, int[]> numericScores, Bowler currBowler, int frame, ScoreBoard scoreBoard) {
         int currScore = scoreCard.get(currBowler)[frame][0];
 
-        if(frame >= 10) {
+        if(frame >= 9) {
             if (currScore < 10){
-                scoreboard.setState(new TenthFrameSecondBallNinthNoStrike());
+                scoreBoard.setState(new TenthFrameSecondBallNinthNoStrike());
             } else {
-                scoreboard.setState(new TenthFrameStrikeNinthNoStrike());
+                scoreBoard.setState(new TenthFrameStrikeNinthNoStrike());
             }
         } else {
             if (currScore < 10) {
-                scoreboard.setState(new SecondBall());
+                scoreBoard.setState(new SecondBall());
             } else {
-                scoreboard.setState(new FirstBallPreviousStrike());
+                scoreBoard.setState(new FirstBallPreviousStrike());
             }
         }
     }
